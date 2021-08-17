@@ -1,0 +1,14 @@
+.App{
+  background: #555555;
+  padding: 20px;
+}
+
+.footer {
+  text-align: center;
+  border: 2px solid #424242;
+  background: #424242;
+}
+
+.footer-heading {
+  color: #F65261;
+}
