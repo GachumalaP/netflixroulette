@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './MoviesList.css';
 import MovieCard from '../MovieCard/MovieCard';
+import MovieModal from '../MovieModal/MovieModal';
 
 
 const MoviesList = () => {
@@ -71,14 +72,32 @@ const MoviesList = () => {
         }
     ]
 
+    const [showMovieModal, setShowMovieModal] = useState(false);
+    const [selectedMovie, setSelectedMovie] = useState({});
+    const renderMovieModal = (movie) => {
+        setShowMovieModal(!showMovieModal);
+        // console.log(movie);
+        setSelectedMovie(movie);
+    }
+
     return (
         <div className="movie-results">
             <h2> 10 movies found</h2>
             <div className="movies-list">
                 {movies.map(movie => (
-                        <MovieCard key={movie.id} title={movie.title} genre={movie.genre} releaseYear={movie.releaseYear} img={movie.img}/>
+                        <MovieCard 
+                            key={movie.id} d
+                            movie={movie}
+                            renderMovieModal={renderMovieModal}
+                        />
                     ))}
             </div>
+            <MovieModal 
+                title="Edit Movie"
+                handleClose={renderMovieModal}
+                showMovieModal={showMovieModal}
+                movie={selectedMovie}
+            />
         </div>
         
     );

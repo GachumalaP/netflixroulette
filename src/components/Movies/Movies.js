@@ -6,6 +6,7 @@ import MoviesList from '../MoviesList/MoviesList';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 const Movies = () => {
+    
     return (
         <div className="movies">
             <div className="genre">
@@ -15,6 +16,7 @@ const Movies = () => {
             <ErrorBoundary>
                 <MoviesList />
             </ErrorBoundary>
+            
         </div>
     );
 }

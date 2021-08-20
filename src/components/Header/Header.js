@@ -3,10 +3,10 @@ import './Header.css';
 import NavBar from '../NavBar/NavBar';
 import SearchBar from '../SearchBar/SearchBar';
 
-const Header = () => {
+const Header = ( {showMovieModal} ) => {
     return (
         <div className="mainHeader">
-            <NavBar />
+            <NavBar showMovieModal={showMovieModal} />
             <SearchBar />
         </div>
     );

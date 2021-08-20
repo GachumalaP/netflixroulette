@@ -1,3 +1,9 @@
+.movie-card {
+    text-align: center;
+    width: max-content;
+    border: 1px soild white;
+}
+
 .movie-card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
@@ -27,8 +33,75 @@
     margin: 0;
 }
 
-.movie-card {
+.movie-img-container {
+    position: relative;
     text-align: center;
-    width: max-content;
-    border: 1px soild white;
 }
+.movie-card-icon{
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    background-color: #232323;
+    color: #ffffff;
+    transform: rotate(90deg);
+    text-align: center;
+    padding: 2px;
+    border-radius: 50%;
+    border: none;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 14px;
+}
+
+.display-block {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}
+
+.movie-card-menu{
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    background-color:#232323;
+    width: 70%;
+    height: auto;
+    padding-bottom: 10px
+}
+
+.movie-card-menu > button {
+    display: block;
+    color: white;
+    float: right;
+    background-color: #232323;
+    border: none;
+}
+
+.movie-card-edit-delete {
+    margin-top: 20px;
+    display: block;
+    color: white;
+    text-align: left;
+}
+.edit{
+    padding-left: 10px;    
+}
+
+.edit:hover{
+    background-color: #F65261;
+}
+
+.delete {
+    padding-left: 10px;    
+    margin-top: 10px;
+}
+
+.delete:hover{
+    background-color: #F65261;
+}
+
+
+

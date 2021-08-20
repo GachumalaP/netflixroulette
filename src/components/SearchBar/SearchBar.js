@@ -6,7 +6,7 @@ const SearchBar = () => {
         <>
         <h2 className="search-title">Find your movie</h2>
         <form className="search-form">
-                <input type="text" placeholder="What do you want to watch?" className="search-form-input" />
+                <input className="search-form-input" type="text" placeholder="What do you want to watch?" />
                 <button className="search-form-btn" >SEARCH</button>
             </form>
         </>
