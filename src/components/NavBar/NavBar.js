@@ -1,12 +1,12 @@
 import React from 'react';
 import './NavBar.css';
 
-const NavBar = ( {showMovieModal} ) => {
+const NavBar = ( props ) => {
 
     return (
         <div className="navbar">
             <p className="navbar-title">NetflixRoulette</p>
-            <button className="navbar-btn" onClick={showMovieModal}>+ Add Movies</button>
+            <button className="navbar-btn" onClick={props.handleClick}>{props.title}</button>
          </div>
     );
 }

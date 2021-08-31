@@ -5,16 +5,16 @@ import SortMovies from '../SortMovies/SortMovies';
 import MoviesList from '../MoviesList/MoviesList';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
-const Movies = () => {
-    
+const Movies = ( props ) => {
+
     return (
         <div className="movies">
             <div className="genre">
-                <ToggleGenre />
-                <SortMovies />
+                <ToggleGenre ToggleGenre={props.ToggleGenre} />
+                <SortMovies SortMovies={props.SortMovies} />
             </div>
             <ErrorBoundary>
-                <MoviesList />
+                <MoviesList movies={props.movies}/>
             </ErrorBoundary>
             
         </div>

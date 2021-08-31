@@ -1,4 +1,8 @@
-
+.search-bar-container {
+    background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0)), url("../../utils/mainheader.jpg");
+    background-position: center top;
+    height: 60vh;
+}
 .search-title {
     text-align: left;
     margin: 10px;
@@ -15,13 +19,17 @@
     background: #232323;
     border-radius: 4px;
     width: 350px;
-    padding: 5px;
+    padding: 3px;
+    border: 1px solid #232323;
+    height: 30px;
+    color: #FFFFFF;
 }
 
 .search-form-btn {
     padding: 5px;
     background-color: #F65261;
     color: #FFFFFF;
-    border: 0.2 px solid black;
+    border: 1px solid black;
     border-radius: 2px;
+    padding: 10px;
 }

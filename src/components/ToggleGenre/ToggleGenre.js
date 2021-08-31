@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ToggleGenre.css';
 
-const ToggleGenre = () => {
+const ToggleGenre = ( props ) => {
     const genres = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
-    const [genre, setGenre] = React.useState("All");
+    const [genre, setGenre] = useState("All");
 
     const RenderButtons = () => {
         return genres.map((Genre)=> {
@@ -13,6 +13,7 @@ const ToggleGenre = () => {
 
     const handleClick = (genre) => {
         setGenre(genre);
+        props.ToggleGenre(genre);
     };
 
     return(

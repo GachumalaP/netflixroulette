@@ -1,0 +1,41 @@
+.modal-form-buttons{
+    float: right;
+    margin-right: 20px;
+}
+
+.select-genre-container {
+    cursor: pointer;
+    position: relative;
+}
+
+.select-genre-options {
+    padding: 10px;
+    position: absolute;
+    z-index: 10;
+}
+
+.display-none {
+    display: none;
+}
+
+.display-grid {
+    display: grid;
+  }
+
+  .select-genre-icon {
+      float: right;
+      padding-right: 5px;
+  }
+
+.movie-form {
+    height: fit-content;
+}
+
+.form-group button {
+    background-color: #F65261;
+    cursor: pointer;
+    border: none;
+    margin-right: 10px;
+    color: #FFFFFF;
+    float: right;
+}

@@ -52,6 +52,7 @@
     padding-left: 10px;
     padding-right: 10px;
     font-size: 14px;
+    cursor: pointer;
 }
 
 .display-block {
@@ -78,6 +79,7 @@
     float: right;
     background-color: #232323;
     border: none;
+    cursor: pointer;
 }
 
 .movie-card-edit-delete {
@@ -87,7 +89,8 @@
     text-align: left;
 }
 .edit{
-    padding-left: 10px;    
+    padding-left: 10px; 
+    cursor: pointer;   
 }
 
 .edit:hover{
@@ -97,6 +100,7 @@
 .delete {
     padding-left: 10px;    
     margin-top: 10px;
+    cursor: pointer;
 }
 
 .delete:hover{
