@@ -1,20 +1,16 @@
-.search-bar-container {
-    background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0)), url("../../utils/mainheader.jpg");
-    background-position: center top;
-    height: 60vh;
-}
-.search-title {
+
+.search_title {
     text-align: left;
     margin: 10px;
     padding: 10px;
     color: #ffffff;
 }
 
-.search-form {
+.search_form {
     text-align: center;
 }
 
-.search-form-input {
+.search_form_input {
     margin-right: 10px;
     background: #232323;
     border-radius: 4px;
@@ -25,7 +21,7 @@
     color: #FFFFFF;
 }
 
-.search-form-btn {
+.search_form_btn {
     padding: 5px;
     background-color: #F65261;
     color: #FFFFFF;

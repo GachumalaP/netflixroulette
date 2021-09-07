@@ -1,25 +1,43 @@
-import React, {useState} from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import { fetchMovies, sortMovies } from '../../redux/movie/movieActions';
 import './SortMovies.css';
 
 const SortMovies = ( props ) => {
 
-    const [sortType, setSortType] = useState("releaseYear");
-
-    const selectSortBy = (type) => {
-        console.log(type);
-        setSortType(type);
-        props.SortMovies(sortType);
+    const selectSortBy = (sortType) => {
+        if(sortType === "")
+        {
+            props.fetchMovies();
+        }
+        else{
+            props.sortMovies(sortType);
+        }
     }
+
     return (
         <div className="sort-movies">
             <label className="label">Sort by:</label>
             <select className="select" onChange={(e) => selectSortBy(e.target.value)}>
-                <option value="releaseYear">Release year</option>
-                <option value="length">Length</option>
-                <option value="title">Title </option>
+                <option value="">--</option>
+                <option value="release_date">Release year</option>
+                <option value="vote_average">rating</option>
             </select>
         </div>
     );
 }
 
-export default SortMovies;
+const mapStateToProps = state => {
+    return {
+        movies : state.movie.movies
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        sortMovies : (sortValue) => dispatch(sortMovies(sortValue)),
+        fetchMovies : () => dispatch(fetchMovies())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SortMovies);

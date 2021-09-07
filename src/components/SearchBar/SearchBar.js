@@ -1,44 +1,44 @@
-import React, { useState } from 'react';
-import NavBar from '../NavBar/NavBar';
-import './SearchBar.css';
+import React from 'react';
+import { connect } from 'react-redux';
+import { fetchMovies, filterMoviesBySearchTerm } from '../../redux/movie/movieActions';
+import styles from './SearchBar.module.css';
 
 const SearchBar = ( props ) => {
 
-    const [searchValue, setSearchValue] = useState("");
+    var searchTerm = React.createRef();
 
-    const handleSearchValueChanges = (e) => {
-        setSearchValue(e.target.value);
-    }
-
-    // const resetSearchValue = () => {
-    //     setSearchValue("");
-    // }
-
-    const searchFunction = (e) => {
-        e.preventDefault();
-        props.Search(searchValue);
-        // resetSearchValue();
+    const searchFunction = () => {
+        var inputTerm = searchTerm.current.value;
+        if(inputTerm === ""){
+            props.fetchMovies();
+        }
+        else{
+            props.filterMoviesBySearchTerm(inputTerm);
+        }
     }
 
     return (
-        <div className="search-bar-container">
-            <NavBar handleClick={props.openMovieModal} title="+ ADD MOVIE"/>
-            <h2 className="search-title">Find your movie</h2>
-            <form className="search-form">
-                <input className="search-form-input" 
-                       type="text" 
-                       placeholder="What do you want to watch?"
-                       value={searchValue}
-                       onChange={handleSearchValueChanges}
-                />
-                <input className="search-form-btn"
-                       type="submit"
-                       value="Search"
-                       onClick={searchFunction} 
-                />
-            </form>
+        <div className={styles.search_bar_container}>
+            <h2 className={styles.search_title}>Find your movie</h2>
+            <div className={styles.search_form}>
+                <input className={styles.search_form_input} ref={searchTerm} placeholder="Type a message..." />
+                <button className={styles.search_form_btn} onClick={searchFunction}>Search</button>
+            </div>
         </div>
     );
 }
 
-export default SearchBar;
+const mapStateToProps = state => {
+    return {
+        movies: state.movie.movies
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        filterMoviesBySearchTerm : (searchTerm) => dispatch(filterMoviesBySearchTerm(searchTerm)),
+        fetchMovies : () => dispatch(fetchMovies()) 
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

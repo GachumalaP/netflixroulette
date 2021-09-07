@@ -1,7 +1,5 @@
 .movie-card {
-    text-align: center;
-    width: max-content;
-    border: 1px soild white;
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);
 }
 
 .movie-card:hover {
@@ -14,8 +12,8 @@
 }
 
 .card-img {
-    height: 250px;
-    width: 200px;
+    height: 90%;
+    width: 100%
 }
 
 .card-content > div {
