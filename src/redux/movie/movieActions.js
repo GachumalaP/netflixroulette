@@ -11,7 +11,6 @@ import { FETCH_MOVIES_REQUEST,
          SHOW_DELETEMOVIE_MODAL,
          HIDE_MOVIE_MODAL,
          POST_MOVIE_SUCCESS,
-         POST_MOVIE_FAILURE,
          EDIT_MOVIE_SUCCESS,
          DELETE_MOVIE_SUCCESS
         } 
@@ -76,12 +75,6 @@ const deleteMovieSuccess = movieId => {
     return {
         type: DELETE_MOVIE_SUCCESS,
         payload: movieId
-    }
-}
-const postMovieFailure = (error) => {
-    return {
-        type: POST_MOVIE_FAILURE,
-        payload: error
     }
 }
 

@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import './MovieCard.css';
 import { connect, useDispatch } from 'react-redux';
 import { fetchMovieById, showDeleteMovieModal, showEditMovieModal } from '../../redux/movie/movieActions';
-
+import { useHistory } from 'react-router-dom';
 const MovieCard = ( props ) => {
-    
+
+    const history = useHistory();
     const [ showMovieCardIcon, setshowMovieCardIcon ] = useState(false);
 
     const [ showMenu, setShowMenu ] = useState(false);
@@ -26,6 +27,7 @@ const MovieCard = ( props ) => {
     }
 
     const renderMovieClick = () => {
+        history.push(`?movieId=${props.movie.id}`);
         dispatch(fetchMovieById(props.movie.id));
     }
 
@@ -66,7 +68,7 @@ const MovieCard = ( props ) => {
                 </div>
                 <span>
                     {props.movie.genres.map(genre => {
-                        return <span>{genre}</span>
+                        return <span key={genre}>{genre}</span>
                     })}
                 </span>
             </div>

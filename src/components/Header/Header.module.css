@@ -1,5 +1,13 @@
 .main_header {
-    background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0)), url("../../utils/mainheader.jpg");
-    background-position: center top;
+    background-image: linear-gradient(rgba(0,0,0,0.527), rgba(0,0,0,0.5)), url("https://s3-alpha-sig.figma.com/img/9ab1/b611/92a81bbe79a924292111ca43f3a39e8f?Expires=1632096000&Signature=K6JuEwCXh6oNsQV3nn4Ip3ekq95x1cdkLIobaycRkqcbpnGuL3gDqnSJsca9DrdFUn-PPq07BLmPZoOAhlvqpwnAQz2B1L4EYRQZogyk10i5kaWLDviLmDqe9g~yGSMlJV3m8qyvMYognFTQ5LAuK6wfrGC-enqB5b~D1VnUTJBD3xOanRpXGauoVgQ0Gyld-XKoYFViJ9psG0QS6jko~zwOfz2qK-Z0vkAVw-Yyy0pee1cFCbsL9RLWKzxaRSX6tR07Z1FY3WAYaXP-qbKAfZFlR87xbJLyrz2rxuiK8UxHodgE5LKkkmRvHkG6zEVMKmAPZfSgaWselHYXLwB6Fg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 60vh;
+}
+
+.header_content {
+    backdrop-filter: blur(5px);
+    height: 60vh;
+	width: 100;
 }

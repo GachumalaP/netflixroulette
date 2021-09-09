@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { fetchMovies } from '../../redux/movie/movieActions';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import './MoviesList.css';
 import MovieCard from '../MovieCard/MovieCard';
@@ -7,16 +6,33 @@ import Modal from '../UI/Modal/Modal'
 import MovieModalForm from '../MovieModalForm/MovieModalForm';
 import DeleteMovieModal from '../DeleteMovieModal/DeleteMovieModal';
 import MovieModalHeader from '../MovieModalHeader/MovieModalHeader';
+import { useLocation } from 'react-router-dom';
+import { fetchMovieById } from '../../redux/movie/movieActions';
+
 
 
 const MoviesList = ( props ) => {
 
-    const moviesData = useSelector(state => state.movie)
-    const dispatch = useDispatch();
+    const useQuery = () => {
+        return new URLSearchParams(useLocation().search);
+    } 
 
-    useEffect(() => {
-        dispatch(fetchMovies());
-    },[]);
+    const query = useQuery();
+    const movieIdParam = query.get('movieId');
+
+    useEffect(()=>{
+        if(movieIdParam !== null)
+        {
+            props.fetchMovieById(Number(movieIdParam))
+        }
+    },[movieIdParam]);
+
+    const moviesData = useSelector(state => state.movie)
+    // const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     dispatch(fetchMovies());
+    // },[]);
 
     const renderMovies = () => {
         return moviesData.movies.map((movie)=>{
@@ -59,5 +75,11 @@ const mapStateToProps = state => {
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchMovieById: (movieId) => dispatch(fetchMovieById(movieId))
+    }
+}
 
-export default connect(mapStateToProps)(MoviesList);
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviesList);
