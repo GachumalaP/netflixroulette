@@ -1,0 +1,9 @@
+{
+    "component": {
+        "testFiles": "**/*.test.{js,jsx}",
+        "componentFolder": "src"
+    },
+    "baseUrl": "http://localhost:3000/search",
+    "experimentalStudio": true
+
+}
