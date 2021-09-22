@@ -20,7 +20,7 @@ const SortMovies = ( props ) => {
             props.sortMovies(sortByQueryParam);
         }
 
-    },[sortByQueryParam])
+    },[])
 
     const selectSortBy = (sortType) => {
         if(sortType === "")

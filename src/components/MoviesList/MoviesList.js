@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch, connect } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
 import './MoviesList.css';
 import MovieCard from '../MovieCard/MovieCard';
 import Modal from '../UI/Modal/Modal'
@@ -25,7 +25,7 @@ const MoviesList = ( props ) => {
         {
             props.fetchMovieById(Number(movieIdParam))
         }
-    },[movieIdParam]);
+    },[]);
 
     const moviesData = useSelector(state => state.movie)
     // const dispatch = useDispatch();

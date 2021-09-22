@@ -14,7 +14,7 @@ export const SearchBar = ( props ) => {
     useEffect(() => {
         if(searchTerm){
             setSearchInput(searchTerm);
-            props.filterMoviesBySearchTerm(searchInput);
+            props.filterMoviesBySearchTerm(searchTerm);
 
         }
         else{
@@ -23,7 +23,7 @@ export const SearchBar = ( props ) => {
         }
     },[])
 
-    const searchFunction = (searchInput) => {
+    const searchFunction = () => {
         if(searchInput === ""){
             props.fetchMovies();
             history.push('/search')
@@ -45,7 +45,7 @@ export const SearchBar = ( props ) => {
                     onChange={(e) => setSearchInput(e.target.value)}
                     value={searchInput} 
                     placeholder="What do you want to watch?"/>
-                <button className={styles.search_form_btn} onClick={searchFunction(searchInput)}>Search</button>
+                <button className={styles.search_form_btn} onClick={searchFunction}>Search</button>
             </div>
         </div>
     );
