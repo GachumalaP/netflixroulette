@@ -126,6 +126,14 @@ export const fetchMovies = () => {
     }
 }
 
+export function asyncFetchMovies() {
+    return async (dispatch) => {
+        const res = await axios.get('http://localhost:4000/movies');
+        const moviesData = res.data.data;
+        dispatch(fetchMoviesSuccess(moviesData));
+    }
+}
+
 export const fetchMovieById = (id) => {
     return (dispatch) => {
         dispatch(fetchMovieRequest());
@@ -141,6 +149,7 @@ export const fetchMovieById = (id) => {
     }
 }
 
+
 export const filterMoviesByGenre = (genre) => {
     return (dispatch) => {
         dispatch(fetchMoviesRequest());
@@ -153,6 +162,15 @@ export const filterMoviesByGenre = (genre) => {
                 const errorMessage = error.message;
                 dispatch(fetchMoviesError(errorMessage));
             });
+    }
+}
+
+export const asyncFilterMoviesByGenre = (genre) => {
+    return async (dispatch) => {
+        dispatch(fetchMoviesRequest());
+        const res = await axios.get(`http://localhost:4000/movies?filter=${genre}`);
+        const filteredMovies = res.data.data;
+        dispatch(fetchMoviesSuccess(filteredMovies));
     }
 }
 
@@ -171,6 +189,15 @@ export const filterMoviesBySearchTerm = (searchTerm) => {
     }
 }
 
+export const asyncFetchMoviesBySearchTerm = (searchTerm) => {
+    return async (dispatch) => {
+        dispatch(fetchMoviesRequest())
+        const res = await axios.get(`http://localhost:4000/movies?search=${searchTerm}&searchBy=title`);
+        const filteredMovies = res.data.data;
+        dispatch(fetchMoviesSuccess(filteredMovies));
+    }
+}
+
 export const sortMovies = (sortByValue) => {
     return (dispatch) => {
         dispatch(fetchMoviesRequest());
@@ -183,6 +210,15 @@ export const sortMovies = (sortByValue) => {
                 const errorMessage = error.message;
                 dispatch(fetchMoviesError(errorMessage));
             });
+    }
+}
+
+export const asyncSortMovies = (sortByValue) => {
+    return async (dispatch) => {
+        dispatch(fetchMoviesRequest());
+        const res = await axios.get(`http://localhost:4000/movies?sortBy=${sortByValue}&sortOrder=desc`);
+        const sortedMovies = res.data.data;
+        dispatch(fetchMoviesSuccess(sortedMovies));
     }
 }
 

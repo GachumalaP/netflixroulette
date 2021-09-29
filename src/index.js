@@ -1,12 +1,23 @@
+import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
+import Routes from './Routes/Routes';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider} from 'react-redux';
+import store from './redux/store';
+import { renderRoutes} from 'react-router-config';
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <BrowserRouter>
+        <div>
+          {renderRoutes(Routes)}
+        </div>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

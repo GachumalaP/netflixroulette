@@ -3,7 +3,7 @@ import './MovieCard.css';
 import { connect, useDispatch } from 'react-redux';
 import { fetchMovieById, showDeleteMovieModal, showEditMovieModal } from '../../redux/movie/movieActions';
 import { useHistory } from 'react-router-dom';
-import sample from '../../utils/mainheader.jpg';
+import poster from '../../utils/defaultPoster.jpg';
 export const MovieCard = ( props ) => {
 
     const history = useHistory();
@@ -33,7 +33,7 @@ export const MovieCard = ( props ) => {
     }
 
     const defaultImage = (e) => {
-        e.target.src = sample
+        e.target.src = poster;
     }
 
     return (
