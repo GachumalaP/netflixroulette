@@ -21,7 +21,7 @@ const Routes = [
         exact: true
     },
     {
-        path: '/error',
+        path: '/',
         component: ErrorComponent
     }
 ]
