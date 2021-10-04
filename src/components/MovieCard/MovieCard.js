@@ -4,6 +4,7 @@ import { connect, useDispatch } from 'react-redux';
 import { fetchMovieById, showDeleteMovieModal, showEditMovieModal } from '../../redux/movie/movieActions';
 import { useHistory } from 'react-router-dom';
 import poster from '../../utils/defaultPoster.jpg';
+
 export const MovieCard = ( props ) => {
 
     const history = useHistory();

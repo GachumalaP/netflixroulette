@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Header.module.css';
 import SearchBar from '../SearchBar/SearchBar';
 import MovieInfo from '../MovieInfo/MovieInfo';
