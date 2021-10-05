@@ -2,8 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { deleteMovie } from '../../redux/movie/movieActions';
 import './DeleteMovieModal.css';
+import {Movie} from '../../shared/Movie';
 
-const DeleteMovieModal = (props) => {
+interface DeleteMovieProps {
+    deleteMovie: (movieId: Number) =>  void,
+    selectedMovie: Movie
+}
+
+const DeleteMovieModal: React.FC<DeleteMovieProps> = (props) => {
     return (
         <div className="delete-movie-modal">
             Are you sure want to delete this movie?

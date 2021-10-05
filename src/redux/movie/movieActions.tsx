@@ -100,7 +100,6 @@ export const showEditMovieModal = (movie) => {
 export const showDeleteMovieModal = () => {
     return {
         type: SHOW_DELETEMOVIE_MODAL,
-
     }
 }
 

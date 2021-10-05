@@ -1,6 +1,5 @@
-import React from 'react';
 
-const ErrorComponent = () => {
+const ErrorComponent: React.FC = () => {
     return (
         <h1>404 page not found</h1>
     )

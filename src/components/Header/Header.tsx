@@ -5,7 +5,7 @@ import NavBar from '../NavBar/NavBar';
 import { useSelector } from 'react-redux';
 
 const Header = () => {
-    const movieInfo = useSelector(state => state.movie.movieInfo);
+    const movieInfo = useSelector((state: any) => state.movie.movieInfo);
     return (
         <div className={styles.main_header}>
             <div className={styles.header_content}>

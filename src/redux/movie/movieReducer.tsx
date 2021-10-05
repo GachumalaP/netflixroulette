@@ -14,8 +14,21 @@ import { FETCH_MOVIES_REQUEST,
          DELETE_MOVIE_SUCCESS
     } 
     from "./movieActionTypes";
+import { Movie } from '../../shared/Movie';
 
-export const initialState = {
+interface MovieState {
+    loading: boolean,
+    movies: Array<Movie>,
+    selectedMovie: {},
+    movieInfo: boolean,
+    addMovieModal: boolean,
+    editMovieModal: boolean,
+    deleteMovieModal: boolean,
+    error: string
+
+}
+
+export const initialState: MovieState= {
     loading: false,
     movies: [],
     selectedMovie: {},
@@ -98,7 +111,7 @@ const movieReducer = (state=initialState, action) => {
         }
         case SHOW_DELETEMOVIE_MODAL : return {
             ...state,
-            deleteMovieModal: true
+            deleteMovieModal: true,
         }
         case HIDE_MOVIE_MODAL: return {
             ...state,

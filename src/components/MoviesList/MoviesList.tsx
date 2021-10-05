@@ -9,9 +9,14 @@ import MovieModalHeader from '../MovieModalHeader/MovieModalHeader';
 import { useLocation } from 'react-router-dom';
 import { fetchMovieById } from '../../redux/movie/movieActions';
 
+interface MovieListProps {
+    editMovieModal?: boolean,
+    deleteMovieModal?: boolean,
+    fetchMovieById : (movieId : Number) => void
+    
+}
 
-
-const MoviesList = ( props ) => {
+const MoviesList: React.FC<MovieListProps> = ( props ) => {
 
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);
@@ -27,12 +32,7 @@ const MoviesList = ( props ) => {
         }
     },[movieIdParam]);
 
-    const moviesData = useSelector(state => state.movie)
-    // const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     dispatch(fetchMovies());
-    // },[]);
+    const moviesData = useSelector((state: any) => state.movie)
 
     const renderMovies = () => {
         return moviesData.movies.map((movie)=>{

@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { fetchMovies, filterMoviesByGenre } from '../../redux/movie/movieActions';
 import './ToggleGenre.css';
 import { useLocation, useHistory } from 'react-router-dom';
 
-const ToggleGenre = ( props ) => {
+interface ToggleGenreProps {
+    filterMoviesByGenre: (genre: string) => void,
+    fetchMovies : () => void
+}
+
+const ToggleGenre: React.FC<ToggleGenreProps> = ( props ) => {
 
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);
@@ -44,7 +49,6 @@ const ToggleGenre = ( props ) => {
     };
 
     const RenderButtons = () => {
-        let query = useQuery();
         return genres.map((Genre)=> {
             return ( 
                 <button key={`genre-${Genre}`} 

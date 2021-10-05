@@ -1,10 +1,15 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchMovies, sortMovies } from '../../redux/movie/movieActions';
 import './SortMovies.css';
 import { useLocation, useHistory } from 'react-router-dom';
 
-const SortMovies = ( props ) => {
+interface SortMovieProps {
+    sortMovies: (sortType: string) =>  void,
+    fetchMovies: () => void
+}
+
+const SortMovies: React.FC<SortMovieProps> = ( props ) => {
 
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);

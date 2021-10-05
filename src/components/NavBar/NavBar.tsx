@@ -1,9 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { hideMovieInfo, showAddMovieModal } from '../../redux/movie/movieActions';
+import { showAddMovieModal } from '../../redux/movie/movieActions';
 import styles from'./NavBar.module.css';
 
-const NavBar = ( props ) => {
+interface NavBarProps {
+    title: string,
+    showAddMovieModal: () => void
+}
+
+const NavBar: React.FC<NavBarProps> = ( props ) => {
 
     return (
         <div className={styles.navbar}>
@@ -22,7 +27,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
     return {
         showAddMovieModal : () => dispatch(showAddMovieModal()),
-        hideMovieInfo : () => dispatch(hideMovieInfo())
     }
 }
 
