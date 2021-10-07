@@ -11,31 +11,26 @@ interface ToggleGenreProps {
 
 const ToggleGenre: React.FC<ToggleGenreProps> = ( props ) => {
 
+    const genres = ['all', 'documentary', 'comedy', 'horror', 'crime'];
+    const [genre, setGenre] = useState("all");
+
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);
     }
-
     const history = useHistory();
 
     const query = useQuery();
-    const genreQueryParam = query.get("genre");
-    
-    useEffect(()=>{
+    const genreQueryParam = query.get("genre");  
+
+    useEffect(() => {
         if(genreQueryParam !== null) {
-            setGenre(genreQueryParam)
-            if(genreQueryParam === 'all') {
-                props.fetchMovies()
-            }
-            else {
-                props.filterMoviesByGenre(genreQueryParam);
-            }
+            setGenre(genreQueryParam);
         }
-    },[genreQueryParam])
+        else {
+            setGenre(genre);
+        }
+    },[genre, genreQueryParam]);
     
-
-    const genres = ['all', 'documentary', 'comedy', 'horror', 'crime'];
-    const [genre, setGenre] = useState("All");
-
     const handleClick = (genre) => {
         setGenre(genre);
         if(genre.toLowerCase() === 'all') {

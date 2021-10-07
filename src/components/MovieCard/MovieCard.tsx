@@ -71,7 +71,7 @@ export const MovieCard = ( props ) => {
                 </div>
                 <span>
                     {props.movie.genres.map(genre => {
-                        return <span key={genre}>{genre}</span>
+                        return <span key={genre}>{genre} </span>
                     })}
                 </span>
             </div>
