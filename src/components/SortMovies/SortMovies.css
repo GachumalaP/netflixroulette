@@ -1,0 +1,13 @@
+.select {
+    background-color: transparent;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-left: 10px;
+    background-color: #232323;
+}
+
+.label {
+    color: #FFFFFF;
+}

@@ -1,0 +1,20 @@
+.movie-results{
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+.movie-results >  h2{
+    font-size: 24px;
+    font-weight: 400;
+    text-align: left;
+    color: #FFFFFF;
+    margin-left: 10px
+}
+
+.movies-list {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}

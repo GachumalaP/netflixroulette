@@ -1,0 +1,26 @@
+.navbar {
+    display: flex;
+    /* padding: 20px; */
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.navbar_btn {
+    background: rgba(96, 96, 96, 0.68);
+    border-radius: 4px;
+    color: #F65261;
+    border: 1px solid rgba(96, 96, 96, 0.68);
+    padding: 10px;
+}
+
+.navbar_btn:hover {
+    color:#000000;
+    background-color: #555555;
+} 
+
+.navbar_title{
+    color: #F65261;
+    margin: 0;
+    font-size: 20px;
+    line-height: 24px;
+}

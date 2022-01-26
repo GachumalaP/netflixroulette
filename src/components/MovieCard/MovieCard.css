@@ -1,0 +1,109 @@
+.movie-card {
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);
+}
+
+.movie-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card-content {
+    padding: 2px 16px;
+    color: white;
+}
+
+.card-img {
+    height: 90%;
+    width: 100%
+}
+
+.card-content > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-year {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.card-genre {
+    margin: 0;
+}
+
+.movie-img-container {
+    position: relative;
+    text-align: center;
+}
+.movie-card-icon{
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    background-color: #232323;
+    color: #ffffff;
+    transform: rotate(90deg);
+    text-align: center;
+    padding: 2px;
+    border-radius: 50%;
+    border: none;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.display-block {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}
+
+.movie-card-menu{
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    background-color:#232323;
+    width: 70%;
+    height: auto;
+    padding-bottom: 10px
+}
+
+.movie-card-menu > button {
+    display: block;
+    color: white;
+    float: right;
+    background-color: #232323;
+    border: none;
+    cursor: pointer;
+}
+
+.movie-card-edit-delete {
+    margin-top: 20px;
+    display: block;
+    color: white;
+    text-align: left;
+}
+.edit{
+    padding-left: 10px; 
+    cursor: pointer;   
+}
+
+.edit:hover{
+    background-color: #F65261;
+}
+
+.delete {
+    padding-left: 10px;    
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.delete:hover{
+    background-color: #F65261;
+}
+
+
+

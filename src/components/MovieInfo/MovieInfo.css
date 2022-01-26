@@ -1,0 +1,54 @@
+.movie-info-container {
+    background-color: #232323;
+    height: 60vh;
+}
+
+.movie-info-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.movie-info {
+    display: flex;
+    background-color: #232323;
+    height: 50vh;
+}
+
+.img-container {
+    width: 25%;
+    text-align: center;
+}
+
+.movie-img {
+    height: 100%;
+    width: 80%;
+    object-fit: contain;
+}
+
+.info-container {
+    width: 70%;
+    color: #FFFFFF;
+}
+
+.year-runtime-container {
+    display: flex;
+    width: 15%;
+    justify-content: space-between;
+    color: #F65261;
+}
+
+.movie-info-heading{
+    margin: 0;
+    color: #F65261;
+}
+
+.movie-info-header-button {
+    background-color: #232323;
+    color: #F65261;
+    border: none;
+    float: right;
+    margin-top: none;
+    cursor: pointer;
+
+}

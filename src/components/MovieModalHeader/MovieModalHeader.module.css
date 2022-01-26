@@ -1,0 +1,16 @@
+.close_modal_button {
+    background-color: #232323;
+    color: #F65261;
+    border: none;
+    float: right;
+    margin-top: none;
+    
+  }
+
+  .modal_title {
+    color: white;
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+  

@@ -1,0 +1,11 @@
+.genre-button {
+    background: transparent;
+    border: none;
+    padding: 5px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+}
+
+.active {
+    border-bottom: 2px solid #F65261;
+}

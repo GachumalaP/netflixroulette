@@ -1,0 +1,15 @@
+.delete-movie-modal {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.delete-movie-modal > button {
+    align-self: flex-end;
+    width: fit-content;
+    padding: 10px;
+    background-color: #F65261;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+}
