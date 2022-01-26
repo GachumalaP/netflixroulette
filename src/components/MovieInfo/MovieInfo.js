@@ -31,7 +31,7 @@ const MovieInfo = (props) => {
                     <img className="movie-img" src={props.selectedMovie.poster_path} alt="Movie"></img>
                 </div> 
                 <div className="info-container">
-                    <h1>{props.selectedMovie.title}</h1>
+                    <h1 className="info-title">{props.selectedMovie.title}</h1>
                     <span>{props.selectedMovie.genre}</span>
                     <div className="year-runtime-container">
                         <span>{getYear(props.selectedMovie.release_date)}</span>

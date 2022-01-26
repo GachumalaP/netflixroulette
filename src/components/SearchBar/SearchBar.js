@@ -1,36 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { fetchMovies, filterMoviesBySearchTerm } from '../../redux/movie/movieActions';
 import styles from './SearchBar.module.css';
 import { useParams, useHistory } from 'react-router-dom';
 
-const SearchBar = ( props ) => {
-    var searchTerm = React.createRef();
-
-    var urlParams = useParams();
-    var searchParam = urlParams.searchTerm;
+export const SearchBar = ( props ) => {
+    var {searchTerm} = useParams();
     const history = useHistory();
 
+    const [searchInput, setSearchInput] = useState('');
+
+
     useEffect(() => {
-        if(searchParam){
-            props.filterMoviesBySearchTerm(urlParams.searchTerm);
+        if(searchTerm){
+            setSearchInput(searchTerm);
+            props.filterMoviesBySearchTerm(searchTerm);
+
         }
         else{
+            setSearchInput("");
             props.fetchMovies();
         }
-    }, [searchParam])
-
-
+    },[])
 
     const searchFunction = () => {
-        var inputTerm = searchTerm.current.value;
-        if(inputTerm === ""){
-            history.push('/search')
+        if(searchInput === ""){
             props.fetchMovies();
+            history.push('/search')
+
         }
         else{
-            history.push(`/search/${inputTerm}`)
-            props.filterMoviesBySearchTerm(inputTerm);
+            props.filterMoviesBySearchTerm(searchInput);
+            history.push(`/search/${searchInput}`);
         }
     }
 
@@ -38,10 +39,11 @@ const SearchBar = ( props ) => {
         <div className={styles.search_bar_container}>
             <h2 className={styles.search_title}>Find your movie</h2>
             <div className={styles.search_form}>
-                <input 
+                <input
+                    title="inputField"
                     className={styles.search_form_input} 
-                    ref={searchTerm} 
-                    defaultValue={searchParam !== null ? searchParam : ""} 
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    value={searchInput} 
                     placeholder="What do you want to watch?"/>
                 <button className={styles.search_form_btn} onClick={searchFunction}>Search</button>
             </div>
@@ -57,7 +59,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        filterMoviesBySearchTerm : (searchTerm) => dispatch(filterMoviesBySearchTerm(searchTerm)),
+        filterMoviesBySearchTerm : (inputValue) => dispatch(filterMoviesBySearchTerm(inputValue)),
         fetchMovies : () => dispatch(fetchMovies()) 
     }
 }

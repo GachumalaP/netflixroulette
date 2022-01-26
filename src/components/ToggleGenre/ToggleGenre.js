@@ -25,7 +25,7 @@ const ToggleGenre = ( props ) => {
                 props.filterMoviesByGenre(genreQueryParam);
             }
         }
-    },[genreQueryParam])
+    },[])
     
 
     const genres = ['all', 'documentary', 'comedy', 'horror', 'crime'];
