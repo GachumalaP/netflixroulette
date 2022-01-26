@@ -6,8 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import Routes from './Routes/Routes';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider} from 'react-redux';
-import store from './redux/store';
 import { renderRoutes} from 'react-router-config';
+import store from './redux/store';
 
 ReactDOM.hydrate(
   <React.StrictMode>

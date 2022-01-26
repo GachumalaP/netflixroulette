@@ -58,7 +58,7 @@ export const MovieCard = ( props ) => {
                         <div className="edit"  onClick={()=>props.showEditMovieModal(props.movie)}>
                              Edit
                         </div>
-                        <div className="delete" onClick={() =>props.showDeleteMovieModal(props.movie)}>
+                        <div className="delete" onClick={() =>props.showDeleteMovieModal()}>
                             Delete
                         </div>
                     </div>
@@ -71,7 +71,7 @@ export const MovieCard = ( props ) => {
                 </div>
                 <span>
                     {props.movie.genres.map(genre => {
-                        return <span key={genre}>{genre}</span>
+                        return <span key={genre}>{genre} </span>
                     })}
                 </span>
             </div>
@@ -88,7 +88,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
     return {
         showEditMovieModal: (movie) => dispatch(showEditMovieModal(movie)),
-        showDeleteMovieModal: (movie) => dispatch(showDeleteMovieModal(movie))
+        showDeleteMovieModal: () => dispatch(showDeleteMovieModal())
     }
 } 
 

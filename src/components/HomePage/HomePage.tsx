@@ -7,8 +7,14 @@ import MovieModalHeader from '../MovieModalHeader/MovieModalHeader';
 import MovieModalForm from '../MovieModalForm/MovieModalForm';
 import styles from './HomePage.module.css';
 import MovieInfo from '../MovieInfo/MovieInfo';
+import React from 'react';
 
-const HomePage = (props) => {
+interface HomePageProps {
+    movieInfo?: boolean,
+    addMovieModal?: boolean
+}
+
+const HomePage: React.FC<HomePageProps> = (props) => {
     return (
         <div className={styles.home_page}>
                     {props.movieInfo ? <MovieInfo /> : <Header />}

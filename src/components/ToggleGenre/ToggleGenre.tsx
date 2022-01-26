@@ -1,36 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { fetchMovies, filterMoviesByGenre } from '../../redux/movie/movieActions';
 import './ToggleGenre.css';
 import { useLocation, useHistory } from 'react-router-dom';
 
-const ToggleGenre = ( props ) => {
+interface ToggleGenreProps {
+    filterMoviesByGenre: (genre: string) => void,
+    fetchMovies : () => void
+}
+
+const ToggleGenre: React.FC<ToggleGenreProps> = ( props ) => {
+
+    const genres = ['all', 'documentary', 'comedy', 'horror', 'crime'];
+    const [genre, setGenre] = useState("all");
 
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);
     }
-
     const history = useHistory();
 
     const query = useQuery();
-    const genreQueryParam = query.get("genre");
-    
-    useEffect(()=>{
+    const genreQueryParam = query.get("genre");  
+
+    useEffect(() => {
         if(genreQueryParam !== null) {
-            setGenre(genreQueryParam)
-            if(genreQueryParam === 'all') {
-                props.fetchMovies()
-            }
-            else {
-                props.filterMoviesByGenre(genreQueryParam);
-            }
+            setGenre(genreQueryParam);
         }
-    },[genreQueryParam])
+        else {
+            setGenre(genre);
+        }
+    },[genre, genreQueryParam]);
     
-
-    const genres = ['all', 'documentary', 'comedy', 'horror', 'crime'];
-    const [genre, setGenre] = useState("All");
-
     const handleClick = (genre) => {
         setGenre(genre);
         if(genre.toLowerCase() === 'all') {
@@ -44,7 +44,6 @@ const ToggleGenre = ( props ) => {
     };
 
     const RenderButtons = () => {
-        let query = useQuery();
         return genres.map((Genre)=> {
             return ( 
                 <button key={`genre-${Genre}`} 

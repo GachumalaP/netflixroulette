@@ -5,8 +5,15 @@ import './MovieModalForm.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { editMovie, postMovie } from '../../redux/movie/movieActions';
+import { Movie } from '../../shared/Movie';
 
-const MovieModalForm = ( props ) => {
+interface MovieModalFormProps {
+  selectedMovie: Movie,
+  postMovie: (values: any) => void,
+  editMovie: (value: any) =>  void
+
+}
+const MovieModalForm:React.FC<MovieModalFormProps> = ( props ) => {
 
     const [isSelectGenreOpen, setisSelectGenreOpen] = useState(false);
 
@@ -14,15 +21,17 @@ const MovieModalForm = ( props ) => {
       setisSelectGenreOpen(!isSelectGenreOpen);
     }
 
-    var initialValues = {
-      title:'',
-      release_date:'',
-      poster_path:'',
-      vote_average: 0,
-      runtime: 0,
-      overview:'',
-      genres: []
-    }
+    const [ values ] = useState(
+      {
+        title: props.selectedMovie.title || '',
+        release_date:props.selectedMovie.release_date ||'',
+        poster_path:props.selectedMovie.poster_path|| '',
+        vote_average:props.selectedMovie.vote_average || 0,
+        runtime:props.selectedMovie.runtime || 0,
+        overview:props.selectedMovie.overview || '',
+        genres:props.selectedMovie.genres || []
+      }
+    )
 
     const schema = Yup.object({
       title: Yup.string().required('Movie title is required'),
@@ -34,7 +43,7 @@ const MovieModalForm = ( props ) => {
     })
 
     const onSubmit = (values) => {
-      if(props.selectedMovie) {
+      if(props.selectedMovie.title) {
         props.editMovie(values)
       }
       else {
@@ -44,7 +53,7 @@ const MovieModalForm = ( props ) => {
 
     return (
       <Formik 
-          initialValues={props.selectedMovie ? props.selectedMovie : initialValues}
+          initialValues={ values }
           onSubmit={onSubmit}
           validationSchema={schema}
           >
