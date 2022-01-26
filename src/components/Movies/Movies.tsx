@@ -5,7 +5,7 @@ import SortMovies from '../SortMovies/SortMovies';
 import MoviesList from '../MoviesList/MoviesList';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
-const Movies = () => {
+const Movies: React.FC = () => {
 
     return (
         <div className="movies">

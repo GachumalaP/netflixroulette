@@ -1,7 +1,11 @@
 import React from 'react';
 import styles from './Modal.module.css';
 
-const Modal = (props) => {
+interface ModalProps {
+    children: JSX.Element | JSX.Element[]
+}
+
+const Modal: React.FC<ModalProps> = (props) => {
     return (
         <div className={styles.modal}>
             <div className={styles.modal_content}>

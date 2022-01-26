@@ -4,28 +4,35 @@ import { fetchMovies, filterMoviesBySearchTerm } from '../../redux/movie/movieAc
 import styles from './SearchBar.module.css';
 import { useParams, useHistory } from 'react-router-dom';
 
-export const SearchBar = ( props ) => {
-    var {searchTerm} = useParams();
+interface paramTypes {
+    searchTerm: string
+}
+
+interface SearchBarProps {
+    fetchMovies : () => void,
+    filterMoviesBySearchTerm : (searchTerm: string) => void
+
+}
+
+export const SearchBar: React.FC<SearchBarProps> = ( props ) => {
+    var {searchTerm} = useParams<paramTypes>();
     const history = useHistory();
 
     const [searchInput, setSearchInput] = useState('');
 
-
     useEffect(() => {
         if(searchTerm){
-            props.filterMoviesBySearchTerm(searchTerm);
-
+            setSearchInput(searchTerm); 
         }
         else{
-            props.fetchMovies();
+            setSearchInput('');
         }
-    },[])
+    },[searchTerm])
 
     const searchFunction = () => {
         if(searchInput === ""){
             props.fetchMovies();
             history.push('/search')
-
         }
         else{
             props.filterMoviesBySearchTerm(searchInput);

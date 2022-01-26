@@ -1,6 +1,5 @@
-import React from 'react';
 
-const ErrorBoundary = (props) => {
+const ErrorBoundary:React.FC = (props: any) => {
     let errors = true;
 
     const errorText = () => (

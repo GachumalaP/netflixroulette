@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import { hideMovieModal } from '../../redux/movie/movieActions';
 import styles from './MovieModalHeader.module.css';
 
-const MovieModalHeader = ( props ) => {
+interface MovieModalHeaderProps {
+    hideMovieModal ?: () => void,
+    title: string
+}
+
+const MovieModalHeader:React.FC<MovieModalHeaderProps> = ( props ) => {
     return (
         <div>
             <button className={styles.close_modal_button} onClick={props.hideMovieModal}>X</button>
