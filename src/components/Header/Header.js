@@ -9,8 +9,10 @@ const Header = () => {
     const movieInfo = useSelector(state => state.movie.movieInfo);
     return (
         <div className={styles.main_header}>
-            <NavBar title="+ ADD MOVIE"/>
-            {movieInfo === true ? <MovieInfo />: <SearchBar />}
+            <div className={styles.header_content}>
+                <NavBar title="+ ADD MOVIE"/>
+                {movieInfo === true ? <MovieInfo />: <SearchBar />}
+            </div> 
         </div>
     );
 }

@@ -9,7 +9,7 @@
     background: rgba(96, 96, 96, 0.68);
     border-radius: 4px;
     color: #F65261;
-    border: 1px solid black;
+    border: 1px solid rgba(96, 96, 96, 0.68);
     padding: 10px;
 }
 
@@ -21,4 +21,6 @@
 .navbar_title{
     color: #F65261;
     margin: 0;
+    font-size: 20px;
+    line-height: 24px;
 }

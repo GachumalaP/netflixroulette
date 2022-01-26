@@ -7,7 +7,7 @@ const NavBar = ( props ) => {
 
     return (
         <div className={styles.navbar}>
-            <p className={styles.navbar_title}>NetflixRoulette</p>
+            <p className={styles.navbar_title}><b>netflix</b>Roulette</p>
             <button className={styles.navbar_btn} onClick={props.showAddMovieModal}>{props.title}</button>
          </div>
     );

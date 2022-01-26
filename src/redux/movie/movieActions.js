@@ -11,77 +11,70 @@ import { FETCH_MOVIES_REQUEST,
          SHOW_DELETEMOVIE_MODAL,
          HIDE_MOVIE_MODAL,
          POST_MOVIE_SUCCESS,
-         POST_MOVIE_FAILURE,
          EDIT_MOVIE_SUCCESS,
          DELETE_MOVIE_SUCCESS
         } 
     from "./movieActionTypes";
 
 
-const fetchMoviesRequest = () => {
+export const fetchMoviesRequest = () => {
     return {
         type: FETCH_MOVIES_REQUEST
     }
 }
 
-const fetchMoviesSuccess = (movies) => {
+export const fetchMoviesSuccess = (movies) => {
     return {
         type: FETCH_MOVIES_SUCCESS,
         payload: movies
     }
 }
 
-const fetchMoviesError = (error) => {
+export const fetchMoviesError = (error) => {
     return {
         type: FETCH_MOVIES_ERROR,
         payload: error
     }
 }
 
-const fetchMovieRequest = () => {
+export const fetchMovieRequest = () => {
     return {
         type: FETCH_MOVIE_REQUEST
     }
 }
 
-const fetchMovieSuccess = (movie) => {
+export const fetchMovieSuccess = (movie) => {
     return {
         type: FETCH_MOVIE_SUCCESS,
         payload: movie
     }
 }
 
-const fetchMovieError = error => {
+export const fetchMovieError = error => {
     return {
         type: FETCH_MOVIE_ERROR,
         payload: error
     }
 }
 
-const postMovieSuccess = (movie) => {
+export const postMovieSuccess = (movie) => {
     return {
         type: POST_MOVIE_SUCCESS,
         payload: movie
     }
 }
 
-const editMovieSuccess = movie => {
+export const editMovieSuccess = movie => {
     return {
         type: EDIT_MOVIE_SUCCESS,
         payload: movie
     }
 }
 
-const deleteMovieSuccess = movieId => {
+export const deleteMovieSuccess = movieId => {
     return {
         type: DELETE_MOVIE_SUCCESS,
         payload: movieId
-    }
-}
-const postMovieFailure = (error) => {
-    return {
-        type: POST_MOVIE_FAILURE,
-        payload: error
     }
 }
 
@@ -104,10 +97,10 @@ export const showEditMovieModal = (movie) => {
     }
 }
 
-export const showDeleteMovieModal = (movie) => {
+export const showDeleteMovieModal = () => {
     return {
         type: SHOW_DELETEMOVIE_MODAL,
-        payload: movie
+
     }
 }
 

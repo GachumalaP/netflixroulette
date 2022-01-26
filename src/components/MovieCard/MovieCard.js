@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import './MovieCard.css';
 import { connect, useDispatch } from 'react-redux';
 import { fetchMovieById, showDeleteMovieModal, showEditMovieModal } from '../../redux/movie/movieActions';
+import { useHistory } from 'react-router-dom';
+import sample from '../../utils/mainheader.jpg';
+export const MovieCard = ( props ) => {
 
-const MovieCard = ( props ) => {
-    
+    const history = useHistory();
     const [ showMovieCardIcon, setshowMovieCardIcon ] = useState(false);
 
     const [ showMenu, setShowMenu ] = useState(false);
@@ -26,11 +28,12 @@ const MovieCard = ( props ) => {
     }
 
     const renderMovieClick = () => {
+        history.push(`?movieId=${props.movie.id}`);
         dispatch(fetchMovieById(props.movie.id));
     }
 
     const defaultImage = (e) => {
-        e.target.src = "https://s3-alpha-sig.figma.com/img/d1aa/af35/28ac5bd1a8440253c319d472993bdd34?Expires=1631491200&Signature=MKjoVSkJXBD~krs~xKOCWNP-8f8UciPGcTva-UopR3C5Fz-pt5PQQftjFBzLpYDgp4ZAGCqcegXycNx5f5JKV0TRDZrsQVTdBKsK4DwLbugk3r2rCf3Pb18ZonmPm9zPrGPaEL8vK8IcWNq09YG75yI24mKKuuUVetbu0wEx9ax9bJSycEfOlrVwwfdE~~nLv75JOJxA0-MY4ydPo42puwWFIm7nnCI~PPizlgXZx91Y7MFWl~3kLPpYcZrzg6cT8ftkfqNzORqDwYbxUPaN8WEfIT4L0394b7b4hsfvycMxLixvgAdAsX~uAGPDxuLJnIvhQ22-NuxDODn~Rfic5A__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA";
+        e.target.src = sample
     }
 
     return (
@@ -39,6 +42,7 @@ const MovieCard = ( props ) => {
             onMouseOver={toggleMovieCardIcon}
             onMouseOut={toggleMovieCardIcon}
             onClick={() => renderMovieClick()}
+            data-testid={`movie-item-${props.movie.id}`}
         >
             <div className="movie-img-container" >
                 <img className="card-img" src={props.movie.poster_path} alt="alt text" onError={defaultImage}></img>
@@ -66,7 +70,7 @@ const MovieCard = ( props ) => {
                 </div>
                 <span>
                     {props.movie.genres.map(genre => {
-                        return <span>{genre}</span>
+                        return <span key={genre}>{genre}</span>
                     })}
                 </span>
             </div>

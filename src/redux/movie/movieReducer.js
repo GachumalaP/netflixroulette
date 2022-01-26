@@ -15,7 +15,7 @@ import { FETCH_MOVIES_REQUEST,
     } 
     from "./movieActionTypes";
 
-const initialState = {
+export const initialState = {
     loading: false,
     movies: [],
     selectedMovie: {},
@@ -46,7 +46,8 @@ const movieReducer = (state=initialState, action) => {
         }
         case FETCH_MOVIE_REQUEST : return {
             ...state,
-            loading: true
+            loading: true,
+            error:''
         }
         case FETCH_MOVIE_SUCCESS : return {
             ...state,
