@@ -1,14 +1,18 @@
-import React, { useContext } from 'react';
-import './Header.css';
+import React from 'react';
+import styles from './Header.module.css';
 import SearchBar from '../SearchBar/SearchBar';
 import MovieInfo from '../MovieInfo/MovieInfo';
-import ViewMovieContext from '../../contexts/ViewMovieContext';
+import NavBar from '../NavBar/NavBar';
+import { useSelector } from 'react-redux';
 
-const Header = ( props ) => {
-    const movieInfo = useContext(ViewMovieContext);
+const Header = () => {
+    const movieInfo = useSelector(state => state.movie.movieInfo);
     return (
-        <div className="mainHeader">
-            {movieInfo.viewMovieInfo === true ? <MovieInfo />: <SearchBar openMovieModal={props.handleClick} Search= {props.Search}/>}
+        <div className={styles.main_header}>
+            <div className={styles.header_content}>
+                <NavBar title="+ ADD MOVIE"/>
+                {movieInfo === true ? <MovieInfo />: <SearchBar />}
+            </div> 
         </div>
     );
 }

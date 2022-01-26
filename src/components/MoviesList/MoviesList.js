@@ -1,65 +1,85 @@
-import React, {useState} from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, connect } from 'react-redux';
 import './MoviesList.css';
 import MovieCard from '../MovieCard/MovieCard';
-import MovieModal from '../MovieModal/MovieModal';
+import Modal from '../UI/Modal/Modal'
 import MovieModalForm from '../MovieModalForm/MovieModalForm';
 import DeleteMovieModal from '../DeleteMovieModal/DeleteMovieModal';
+import MovieModalHeader from '../MovieModalHeader/MovieModalHeader';
+import { useLocation } from 'react-router-dom';
+import { fetchMovieById } from '../../redux/movie/movieActions';
+
 
 
 const MoviesList = ( props ) => {
 
-    const [showEditMovieModal, setShowEditMovieModal] = useState(false);
-    const [showDeleteMovieModal, setShowDeleteMovieModal] = useState(false);
-    const [selectedMovie, setSelectedMovie] = useState({});
-    
-    const openEditMovieModal = (movie) => {
-        setShowEditMovieModal(true);
-        setSelectedMovie(movie);
-    }
+    const useQuery = () => {
+        return new URLSearchParams(useLocation().search);
+    } 
 
-    const closeEditMovieModal = () => {
-        setShowEditMovieModal(false);
-    }
+    const query = useQuery();
+    const movieIdParam = query.get('movieId');
 
-    const openDeleteMovieModal = () => {
-        setShowDeleteMovieModal(true);
-    }
+    useEffect(()=>{
+        if(movieIdParam !== null)
+        {
+            props.fetchMovieById(Number(movieIdParam))
+        }
+    },[]);
 
-    const closeDeleteMovieModal = () => {
-        setShowDeleteMovieModal(false);
-    }
+    const moviesData = useSelector(state => state.movie)
+    // const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     dispatch(fetchMovies());
+    // },[]);
 
     const renderMovies = () => {
-        return props.movies.map((movie)=>{
+        return moviesData.movies.map((movie)=>{
             return <MovieCard 
                 key={movie.id}
-                movie={movie}
-                openEditMovieModal={openEditMovieModal}
-                openDeleteMovieModal = {openDeleteMovieModal} />
+                movie={movie} />
         });
     }
     
     return (
         <div className="movie-results">
-            <h2>{props.movies.length} movies found</h2>
+            <h2>{moviesData.movies.length} movies found</h2>
             <div className="movies-list">
                 {renderMovies()}
             </div>
-            <MovieModal 
-                title="Edit Movie"
-                closeMovieModal={closeEditMovieModal}
-                movieModal={showEditMovieModal}
-                movie={selectedMovie}>
-                    <MovieModalForm movie={selectedMovie}/>
-            </MovieModal>
-            <MovieModal 
-                title="Delete Movie"
-                closeMovieModal={closeDeleteMovieModal}
-                movieModal = {showDeleteMovieModal}>
-                    <DeleteMovieModal />
-            </MovieModal>
+            {
+                props.editMovieModal ? 
+                    <Modal>
+                        <MovieModalHeader title="edit movie" />
+                        <MovieModalForm />
+                    </Modal> :
+                    null
+            }
+            {
+                props.deleteMovieModal ? 
+                    <Modal>
+                        <MovieModalHeader title="Delete movie" />
+                        <DeleteMovieModal />
+                    </Modal> : 
+                    null
+            }
         </div>
     );
 }
 
-export default MoviesList;
+const mapStateToProps = state => {
+    return {
+        editMovieModal : state.movie.editMovieModal,
+        deleteMovieModal : state.movie.deleteMovieModal
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchMovieById: (movieId) => dispatch(fetchMovieById(movieId))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviesList);

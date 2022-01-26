@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
+import { connect } from 'react-redux';
 import '../MovieModal/MovieModal.css';
 import './MovieModalForm.css';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { editMovie, postMovie } from '../../redux/movie/movieActions';
 
 const MovieModalForm = ( props ) => {
 
@@ -8,99 +12,144 @@ const MovieModalForm = ( props ) => {
 
     const renderClickSelectGenre = () => {
       setisSelectGenreOpen(!isSelectGenreOpen);
-      console.log(isSelectGenreOpen)
     }
 
-    
+    var initialValues = {
+      title:'',
+      release_date:'',
+      poster_path:'',
+      vote_average: 0,
+      runtime: 0,
+      overview:'',
+      genres: []
+    }
+
+    const schema = Yup.object({
+      title: Yup.string().required('Movie title is required'),
+      poster_path: Yup.string().required('*Movie url is required'),
+      overview: Yup.string().required('overview is required'),
+      runtime: Yup.number().required(),
+      genres: Yup.array().of(Yup.string()).required(),
+
+    })
+
+    const onSubmit = (values) => {
+      if(props.selectedMovie) {
+        props.editMovie(values)
+      }
+      else {
+        props.postMovie(values)
+      }
+    }   
+
     return (
-        <div className="movie-form">
-            <div className="row">
-              <div className="col">
-               <div className="form-group">
-                  <label>Movie Name</label>
-                  <input type="text" defaultValue={props.movie.title}/>
-                </div>
-              </div>
-              <div className="col">
+      <Formik 
+          initialValues={props.selectedMovie ? props.selectedMovie : initialValues}
+          onSubmit={onSubmit}
+          validationSchema={schema}
+          >
+            <Form>
+              <div className="movie-form">
+              <div className="row">
+                <div className="col">
                 <div className="form-group">
-                  <label>Release Date</label>
-                  <input type="date" defaultValue={props.movie.releaseYear}/>
+                    <label>Movie Name</label>
+                    <Field type="text" name="title"/>
+                    <ErrorMessage name="title" />
+                  </div>
                 </div>
-              </div>
-              <div className="col">
-                <div className="form-group">
-                  <label>Movie Url</label>
-                  <input type="text" placeholder="http://"/>
+                <div className="col">
+                  <div className="form-group">
+                    <label>Release Date</label>
+                    <Field type="date" name="release_date"/>
+                  </div>
                 </div>
-              </div>
-              <div className="col">
-                <div className="form-group">
-                  <label>Rating</label>
-                  <input type="text" />
+                <div className="col">
+                  <div className="form-group">
+                    <label>Movie Url</label>
+                    <Field type="text" name="poster_path" placeholder="http://" />
+                    <ErrorMessage name="poster_path" />
+                  </div>
                 </div>
-              </div>
-              <div className="col">
-                <div className="form-group">
-                  <label>Genre</label>
-                  <div className="select-genre-container">
-                    <div 
-                      className="select-genre"
-                      onClick={renderClickSelectGenre}
-                    >
-                      <div className="select-genre-icon"> {`${isSelectGenreOpen === true ? '-' : '+'}`} </div>
+                <div className="col">
+                  <div className="form-group">
+                    <label>Rating</label>
+                    <Field type="number" name="vote_average" />
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="form-group">
+                    <label>Genre</label>
+                    <div className="select-genre-container">
+                      <div 
+                        className="select-genre"
+                        onClick={renderClickSelectGenre}
+                      >
+                        <div className="select-genre-icon"> {`${isSelectGenreOpen === true ? '-' : '+'}`} </div>
+                      </div>
+                      <div 
+                        role="group"
+                        className={`select-genre-options ${isSelectGenreOpen === true  ? 'display-grid' 
+                        : 'display-none'}`}>
+                          <label>
+                            <Field type="checkbox" name="genres" value="comedy"/> Comedy
+                          </label>
+                          <label>
+                            <Field type="checkbox" name="genres" value="romance"/> Romance
+                          </label>
+                          <label>
+                            <Field type="checkbox" name="genres"  value="drama"/> Drama
+                          </label>
+                          <label>
+                            <Field type="checkbox" name="genres"  value="action" /> Action
+                          </label>
+                      </div>
                     </div>
-                    <div 
-                      className={`select-genre-options ${isSelectGenreOpen === true  ? 'display-grid' 
-                      : 'display-none'}`}>
-                        <label>
-                          <input type="checkbox" /> Comedy
-                        </label>
-                        <label>
-                          <input type="checkbox" /> Comedy
-                        </label>
-                        <label>
-                          <input type="checkbox" /> Comedy
-                        </label>
-                        <label>
-                          <input type="checkbox" /> Comedy
-                        </label>
-                    </div>
+                    <ErrorMessage name="genres"/>
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="form-group">
+                    <label>Runtime</label>
+                    <Field type="number" name="runtime"/>
+                    <ErrorMessage name="runtime"/>
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="form-group">
+                    <label>Overview</label>
+                    <Field component="textarea" name="overview"/>
+                    <ErrorMessage name="overview" />
                   </div>
                 </div>
               </div>
-              <div className="col">
-                <div className="form-group">
-                  <label>Runtime</label>
-                  <input type="text" />
+              <div className="modal-form-buttons">
+                <div className="col">
+                  <div className="form-group">
+                    <button type="reset">Reset</button>
+                    <button type="submit">Submit</button>
+                  </div>
                 </div>
               </div>
-              <div className="col">
-                <div className="form-group">
-                  <label>Overview</label>
-                  <textarea></textarea>
-                </div>
-              </div>
-            </div>
-            <div className="modal-form-buttons">
-              <div className="col">
-                <div className="form-group">
-                  <button>Reset</button>
-                  <button>Submit</button>
-                </div>
-              </div>
-            </div>
-        </div>
+          </div>
+        </Form>
+      </Formik>
+        
     );
 }
 
-MovieModalForm.defaultProps = {
-    movie: {
-      id: '',
-      title: '',
-      genre: '',
-      releaseYear: '',
-      img: '' 
-    }
+const mapStateToProps = state => {
+  return {
+    selectedMovie: state.movie.selectedMovie,
+    movie: state.movie.movies
+  }
 }
 
-export default MovieModalForm;
+const mapDispatchToProps = dispatch => {
+  return {
+    postMovie: (movie) => dispatch(postMovie(movie)),
+    editMovie: (movie) => dispatch(editMovie(movie))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieModalForm);

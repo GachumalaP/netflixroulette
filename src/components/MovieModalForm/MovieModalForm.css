@@ -29,13 +29,21 @@
 
 .movie-form {
     height: fit-content;
+    margin: 20px;
 }
 
 .form-group button {
     background-color: #F65261;
     cursor: pointer;
-    border: none;
-    margin-right: 10px;
-    color: #FFFFFF;
     float: right;
+    padding:0.35em 1.2em;
+    border-radius: 0.12em;
+    color: #FFFFFF;
+    margin: 0 0.3em 0.3em 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: 300;
+    text-align: center;
+    border: 1px solid #424242;
+
 }

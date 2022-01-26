@@ -1,14 +1,17 @@
-import React, {useContext, useState} from 'react';
+import React, { useState } from 'react';
 import './MovieCard.css';
-import ViewMovieContext from '../../contexts/ViewMovieContext';
+import { connect, useDispatch } from 'react-redux';
+import { fetchMovieById, showDeleteMovieModal, showEditMovieModal } from '../../redux/movie/movieActions';
+import { useHistory } from 'react-router-dom';
+import sample from '../../utils/mainheader.jpg';
+export const MovieCard = ( props ) => {
 
-const MovieCard = ( props ) => {
-    
+    const history = useHistory();
     const [ showMovieCardIcon, setshowMovieCardIcon ] = useState(false);
 
     const [ showMenu, setShowMenu ] = useState(false);
 
-    const movieInfo = useContext(ViewMovieContext)
+    const dispatch = useDispatch();
 
     const toggleMovieCardIcon = () => {
         setshowMovieCardIcon(!showMovieCardIcon)
@@ -24,15 +27,25 @@ const MovieCard = ( props ) => {
         setShowMenu(false);
     }
 
+    const renderMovieClick = () => {
+        history.push(`?movieId=${props.movie.id}`);
+        dispatch(fetchMovieById(props.movie.id));
+    }
+
+    const defaultImage = (e) => {
+        e.target.src = sample
+    }
+
     return (
         <div 
             className="movie-card"
             onMouseOver={toggleMovieCardIcon}
             onMouseOut={toggleMovieCardIcon}
-            onClick={() => movieInfo.showMovieInfo(props.movie)}
+            onClick={() => renderMovieClick()}
+            data-testid={`movie-item-${props.movie.id}`}
         >
             <div className="movie-img-container" >
-                <img className="card-img" src={props.movie.img} alt="alt text"></img>
+                <img className="card-img" src={props.movie.poster_path} alt="alt text" onError={defaultImage}></img>
                 <button 
                     className={`movie-card-icon ${showMovieCardIcon === true && showMenu === false ? 'display-block' : 'display-none'}`}
                     onClick={renderShowMenu}
@@ -41,10 +54,10 @@ const MovieCard = ( props ) => {
                 <div className={`movie-card-menu ${showMenu === true ? 'display-block': 'display-none'}`}>
                     <button onClick={hideShowMenu}>X</button>
                     <div className="movie-card-edit-delete">
-                        <div className="edit"  onClick={()=>props.openEditMovieModal(props.movie)}>
+                        <div className="edit"  onClick={()=>props.showEditMovieModal(props.movie)}>
                              Edit
                         </div>
-                        <div className="delete" onClick={()=>props.openDeleteMovieModal(props.movie)}>
+                        <div className="delete" onClick={() =>props.showDeleteMovieModal(props.movie)}>
                             Delete
                         </div>
                     </div>
@@ -53,12 +66,29 @@ const MovieCard = ( props ) => {
             <div className="card-content">
                 <div>
                     <h5 className="card-title">{props.movie.title}</h5>
-                    <h5 className="card-year">{props.movie.releaseYear}</h5>
+                    <h5 className="card-year">{props.movie.release_date}</h5>
                 </div>
-                <h5 className="card-genre">{props.movie.genre}</h5>
+                <span>
+                    {props.movie.genres.map(genre => {
+                        return <span key={genre}>{genre}</span>
+                    })}
+                </span>
             </div>
         </div>
     );
 }
 
-export default MovieCard;
+const mapStateToProps = state => {
+    return {
+        movieData: state.movie.movies
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        showEditMovieModal: (movie) => dispatch(showEditMovieModal(movie)),
+        showDeleteMovieModal: (movie) => dispatch(showDeleteMovieModal(movie))
+    }
+} 
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieCard);
