@@ -20,22 +20,19 @@ export const SearchBar: React.FC<SearchBarProps> = ( props ) => {
 
     const [searchInput, setSearchInput] = useState('');
 
-
     useEffect(() => {
         if(searchTerm){
-            props.filterMoviesBySearchTerm(searchTerm);
-
+            setSearchInput(searchTerm); 
         }
         else{
-            props.fetchMovies();
+            setSearchInput('');
         }
-    },[])
+    },[searchTerm])
 
     const searchFunction = () => {
         if(searchInput === ""){
             props.fetchMovies();
             history.push('/search')
-
         }
         else{
             props.filterMoviesBySearchTerm(searchInput);

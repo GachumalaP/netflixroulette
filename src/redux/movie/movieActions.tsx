@@ -197,6 +197,105 @@ export const asyncFetchMoviesBySearchTerm = (searchTerm) => {
     }
 }
 
+export const filterMoviesBySearchTermAndGenre = (searchTerm, genre) => {
+    return(dispatch) => {
+        dispatch(fetchMoviesRequest());
+        axios.get(`http://localhost:4000/movies?search=${searchTerm}&searchBy=title&filter=${genre}`)
+            .then(response => {
+                const filteredMovies = response.data.data;
+                dispatch(fetchMoviesSuccess(filteredMovies));
+            })
+            .catch(error => {
+                const errorMessage = error.message;
+                dispatch(fetchMoviesError(errorMessage));
+            });
+    }
+}
+
+export const asyncFilterMoviesBySearchTermAndGenre = (searchTerm, filterByGenre) => {
+    return async (dispatch) => {
+        dispatch(fetchMoviesRequest())
+        const res = await axios.get(`http://localhost:4000/movies?search=${searchTerm}&searchBy=title&filter=${filterByGenre}`);
+        const filteredMovies = res.data.data;
+        dispatch(fetchMoviesSuccess(filteredMovies));
+    }
+}
+
+export const filterAndSortMoviesBySearchTerm = (searchTerm, sortByValue) => {
+    return (dispatch) => {
+        dispatch(fetchMoviesRequest());
+        axios.get(`http://localhost:4000/movies?sortBy=${sortByValue}&sortOrder=desc&search=${searchTerm}&searchBy=title`)
+            .then(response => {
+                const filteredMovies = response.data.data;
+                dispatch(fetchMoviesSuccess(filteredMovies));
+            })
+            .catch(error => {
+                const errorMessage = error.message;
+                dispatch(fetchMoviesError(errorMessage));
+        });
+    }
+}
+
+export const asyncFilterAndSortMoviesBySearchTerm = (searchTerm, sortByValue) => {
+    return async (dispatch) => {
+        dispatch(fetchMoviesRequest());
+        const res = await axios.get(`http://localhost:4000/movies?sortBy=${sortByValue}&sortOrder=desc&search=${searchTerm}&searchBy=title`);
+        const filteredMovies = res.data.data;
+        dispatch(fetchMoviesSuccess(filteredMovies));
+    }
+}
+ 
+export const filterAndSortMoviesByGenre = (sortByValue, filterByGenre) => {
+    return (dispatch) => {
+        dispatch(fetchMoviesRequest());
+        axios.get(`http://localhost:4000/movies?sortBy=${sortByValue}&sortOrder=desc&filter=${filterByGenre}`)
+            .then(response => {
+                const filteredMovies = response.data.data;
+                dispatch(fetchMoviesSuccess(filteredMovies));
+            })
+            .catch(error => {
+                const errorMessage = error.message;
+                dispatch(fetchMoviesError(errorMessage));
+        });
+    }
+}
+
+export const asyncFilterAndSortMoviesByGenre = (sortByValue, filterByGenre) => {
+    return async (dispatch) => {
+        dispatch(fetchMoviesRequest());
+        const res = await axios.get(`http://localhost:4000/movies?sortBy=${sortByValue}&sortOrder=desc&filter=${filterByGenre}`);
+        const filteredMovies = res.data.data;
+        dispatch(fetchMoviesSuccess(filteredMovies));
+    }
+}
+
+// filter and sort movies by sortBy, searchTerm, genre
+export const filterAndSortMoviesBySearchTermGenre = (sortByValue, searchTerm, filterByGenre) => {
+    return (dispatch) => {
+        dispatch(fetchMoviesRequest());
+        axios.get(`http://localhost:4000/movies?sortBy=${sortByValue}&sortOrder=desc&search=${searchTerm}&searchBy=title&filter=${filterByGenre}`)
+            .then(response => {
+                const filteredMovies = response.data.data;
+                dispatch(fetchMoviesSuccess(filteredMovies));
+            })
+            .catch(error => {
+                const errorMessage = error.message;
+                dispatch(fetchMoviesError(errorMessage));
+        });
+    }
+}
+ 
+//async fn for filter and sort movies by searchTerm, genre, sortBy 
+export const asyncFilterAndSortMoviesBySearchTermGenre = (sortByValue, searchTerm, filterByGenre) => {
+    return async (dispatch) => {
+        dispatch(fetchMoviesRequest());
+        const res = await axios.get(`http://localhost:4000/movies?sortBy=${sortByValue}&sortOrder=desc&search=${searchTerm}&searchBy=title&filter=${filterByGenre}`);
+        const filteredMovies = res.data.data;
+        dispatch(fetchMoviesSuccess(filteredMovies));
+    }
+}
+
+//sort movies
 export const sortMovies = (sortByValue) => {
     return (dispatch) => {
         dispatch(fetchMoviesRequest());
@@ -212,6 +311,7 @@ export const sortMovies = (sortByValue) => {
     }
 }
 
+// async fn for sort movies 
 export const asyncSortMovies = (sortByValue) => {
     return async (dispatch) => {
         dispatch(fetchMoviesRequest());
@@ -221,6 +321,7 @@ export const asyncSortMovies = (sortByValue) => {
     }
 }
 
+//post movie 
 export const postMovie = movieObj => {
     return (dispatch) => {
         axios.post('http://localhost:4000/movies', movieObj)
@@ -230,10 +331,11 @@ export const postMovie = movieObj => {
             })
             .catch(error => {
                 console.log(error)
-            })
+            });
     }
 }
 
+//edit movie 
 export const editMovie = movieObj => {
     return (dispatch) => {
         axios.put('http://localhost:4000/movies', movieObj)
@@ -243,11 +345,11 @@ export const editMovie = movieObj => {
             })
             .catch(error => {   
                 console.log(error)
-            })
+            });
     }
-
 }
 
+//delete movie 
 export const deleteMovie = movieId => {
     return (dispatch) => {
         axios.delete(`http://localhost:4000/movies/${movieId}`)
@@ -256,6 +358,6 @@ export const deleteMovie = movieId => {
             })
             .catch(error => {
                 console.log(error);
-            })
+            });
     }
 }

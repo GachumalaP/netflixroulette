@@ -3,6 +3,7 @@ import './MovieInfo.css';
 import { connect } from 'react-redux';
 import { hideMovieInfo } from '../../redux/movie/movieActions';
 import { Movie } from '../../shared/Movie';
+import { useHistory } from 'react-router';
 
 interface MovieInfoProps {
     selectedMovie: Movie,
@@ -10,6 +11,8 @@ interface MovieInfoProps {
 }
 
 const MovieInfo: React.FC<MovieInfoProps> = (props) => {
+
+    const history = useHistory();
     
 
     const convertDuration = (num) => {
@@ -26,11 +29,16 @@ const MovieInfo: React.FC<MovieInfoProps> = (props) => {
         return year;
     }
 
+    const handleSearch = () => {
+        props.hideMovieInfo();
+        history.push('/search');
+    }
+
     return (
         <div className="movie-info-container">
             <div className="movie-info-header">
                 <p className="movie-info-heading">Netflix<b>Roulette</b></p>
-                <button className="movie-info-header-button" onClick={props.hideMovieInfo}>Search</button>
+                <button className="movie-info-header-button" onClick={handleSearch}>Search</button>
             </div>
             <div className="movie-info">
                 <div className="img-container">

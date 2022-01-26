@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchMovies, sortMovies } from '../../redux/movie/movieActions';
 import './SortMovies.css';
@@ -20,13 +19,6 @@ const SortMovies: React.FC<SortMovieProps> = ( props ) => {
     const query = useQuery();
     const sortByQueryParam = query.get("sortBy");
 
-    useEffect(()=>{
-        if(sortByQueryParam !== null){
-            props.sortMovies(sortByQueryParam);
-        }
-
-    },[sortByQueryParam])
-
     const selectSortBy = (sortType) => {
         if(sortType === "")
         {
@@ -43,7 +35,7 @@ const SortMovies: React.FC<SortMovieProps> = ( props ) => {
             <label className="label">Sort by:</label>
             <select className="select" value={sortByQueryParam ? sortByQueryParam : ""} onChange={(e) => selectSortBy(e.target.value)}>
                 <option value="">--</option>
-                <option value="release_date">Release year</option>
+                <option value="release_date">Release date</option>
                 <option value="vote_average">rating</option>
             </select>
         </div>
