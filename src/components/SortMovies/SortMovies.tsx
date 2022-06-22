@@ -2,13 +2,14 @@ import { connect } from 'react-redux';
 import { fetchMovies, sortMovies } from '../../redux/movie/movieActions';
 import './SortMovies.css';
 import { useLocation, useHistory } from 'react-router-dom';
+import { useEffect } from "react";
 
 interface SortMovieProps {
-    sortMovies: (sortType: string) =>  void,
+    sortMovies: (sortType: string) => void,
     fetchMovies: () => void
 }
 
-const SortMovies: React.FC<SortMovieProps> = ( props ) => {
+const SortMovies: React.FC<SortMovieProps> = (props) => {
 
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);
@@ -19,12 +20,18 @@ const SortMovies: React.FC<SortMovieProps> = ( props ) => {
     const query = useQuery();
     const sortByQueryParam = query.get("sortBy");
 
+    useEffect(() => {
+        if (sortByQueryParam !== null) {
+            props.sortMovies(sortByQueryParam);
+        }
+
+    }, [])
+
     const selectSortBy = (sortType) => {
-        if(sortType === "")
-        {
+        if (sortType === "") {
             props.fetchMovies();
         }
-        else{
+        else {
             history.push(`?sortBy=${sortType}`);
             props.sortMovies(sortType);
         }
@@ -44,14 +51,14 @@ const SortMovies: React.FC<SortMovieProps> = ( props ) => {
 
 const mapStateToProps = state => {
     return {
-        movies : state.movie.movies
+        movies: state.movie.movies
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        sortMovies : (sortValue) => dispatch(sortMovies(sortValue)),
-        fetchMovies : () => dispatch(fetchMovies())
+        sortMovies: (sortValue) => dispatch(sortMovies(sortValue)),
+        fetchMovies: () => dispatch(fetchMovies())
     }
 }
 

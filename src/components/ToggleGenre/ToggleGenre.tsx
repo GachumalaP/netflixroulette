@@ -6,10 +6,10 @@ import { useLocation, useHistory } from 'react-router-dom';
 
 interface ToggleGenreProps {
     filterMoviesByGenre: (genre: string) => void,
-    fetchMovies : () => void
+    fetchMovies: () => void
 }
 
-const ToggleGenre: React.FC<ToggleGenreProps> = ( props ) => {
+const ToggleGenre: React.FC<ToggleGenreProps> = (props) => {
 
     const genres = ['all', 'documentary', 'comedy', 'horror', 'crime'];
     const [genre, setGenre] = useState("all");
@@ -20,20 +20,20 @@ const ToggleGenre: React.FC<ToggleGenreProps> = ( props ) => {
     const history = useHistory();
 
     const query = useQuery();
-    const genreQueryParam = query.get("genre");  
+    const genreQueryParam = query.get("genre");
 
     useEffect(() => {
-        if(genreQueryParam !== null) {
+        if (genreQueryParam !== null) {
             setGenre(genreQueryParam);
         }
         else {
             setGenre(genre);
         }
-    },[genre, genreQueryParam]);
-    
+    }, [genre, genreQueryParam]);
+
     const handleClick = (genre) => {
         setGenre(genre);
-        if(genre.toLowerCase() === 'all') {
+        if (genre.toLowerCase() === 'all') {
             history.push('?genre=all');
             props.fetchMovies()
         }
@@ -44,17 +44,17 @@ const ToggleGenre: React.FC<ToggleGenreProps> = ( props ) => {
     };
 
     const RenderButtons = () => {
-        return genres.map((Genre)=> {
-            return ( 
-                <button key={`genre-${Genre}`} 
-                        className= {`genre-button ${genre === Genre ? 'active' : ''}`} 
-                        onClick={() => handleClick(Genre)}>
-                            {Genre}
+        return genres.map((Genre) => {
+            return (
+                <button key={`genre-${Genre}`}
+                    className={`genre-button ${genre === Genre ? 'active' : ''}`}
+                    onClick={() => handleClick(Genre)}>
+                    {Genre}
                 </button>);
         });
     };
 
-    return(
+    return (
         <div className="genre-buttons">
             {RenderButtons()}
         </div>
@@ -70,7 +70,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        filterMoviesByGenre : (genre) => dispatch(filterMoviesByGenre(genre)),
+        filterMoviesByGenre: (genre) => dispatch(filterMoviesByGenre(genre)),
         fetchMovies: () => dispatch(fetchMovies())
     }
 }

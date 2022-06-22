@@ -9,32 +9,33 @@ interface paramTypes {
 }
 
 interface SearchBarProps {
-    fetchMovies : () => void,
-    filterMoviesBySearchTerm : (searchTerm: string) => void
+    fetchMovies: () => void,
+    filterMoviesBySearchTerm: (searchTerm: string) => void
 
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ( props ) => {
-    var {searchTerm} = useParams<paramTypes>();
+export const SearchBar: React.FC<SearchBarProps> = (props) => {
+    var { searchTerm } = useParams<paramTypes>();
     const history = useHistory();
 
     const [searchInput, setSearchInput] = useState('');
 
     useEffect(() => {
-        if(searchTerm){
-            setSearchInput(searchTerm); 
+        if (searchTerm) {
+            setSearchInput(searchTerm);
+            props.filterMoviesBySearchTerm(searchTerm);
         }
-        else{
+        else {
             setSearchInput('');
         }
-    },[searchTerm])
+    }, [searchTerm])
 
     const searchFunction = () => {
-        if(searchInput === ""){
+        if (searchInput === "") {
             props.fetchMovies();
             history.push('/search')
         }
-        else{
+        else {
             props.filterMoviesBySearchTerm(searchInput);
             history.push(`/search/${searchInput}`);
         }
@@ -46,10 +47,10 @@ export const SearchBar: React.FC<SearchBarProps> = ( props ) => {
             <div className={styles.search_form}>
                 <input
                     title="inputField"
-                    className={styles.search_form_input} 
+                    className={styles.search_form_input}
                     onChange={(e) => setSearchInput(e.target.value)}
-                    value={searchInput} 
-                    placeholder="What do you want to watch?"/>
+                    value={searchInput}
+                    placeholder="What do you want to watch?" />
                 <button className={styles.search_form_btn} onClick={searchFunction}>Search</button>
             </div>
         </div>
@@ -64,8 +65,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        filterMoviesBySearchTerm : (inputValue) => dispatch(filterMoviesBySearchTerm(inputValue)),
-        fetchMovies : () => dispatch(fetchMovies()) 
+        filterMoviesBySearchTerm: (inputValue) => dispatch(filterMoviesBySearchTerm(inputValue)),
+        fetchMovies: () => dispatch(fetchMovies())
     }
 }
 
